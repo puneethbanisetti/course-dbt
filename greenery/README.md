@@ -21,7 +21,9 @@ group by 1)
 ### 3.9 days or 93.4 hours
 
 ```sql
-select avg(datediff(hour, created_at, delivered_at)) from dev_db.dbt_puneethbgv1996gmailcom.stg_orders where delivered_at is not null
+select avg(datediff(hour, created_at, delivered_at))
+from dev_db.dbt_puneethbgv1996gmailcom.stg_orders
+where delivered_at is not null
 ```
 
 ## How many users have only made one purchase? Two purchases? Three+ purchases?
@@ -29,19 +31,28 @@ select avg(datediff(hour, created_at, delivered_at)) from dev_db.dbt_puneethbgv1
 ### One purchase: 25
 
 ```sql
-select count(distinct user_id) from (select user_id from dev_db.dbt_puneethbgv1996gmailcom.stg_orders qualify count(distinct order_id) over(partition by user_id) = 1)
+select count(distinct user_id) from
+(select user_id
+from dev_db.dbt_puneethbgv1996gmailcom.stg_orders
+qualify count(distinct order_id) over(partition by user_id) = 1)
 ```
 
 ### Two purchases: 28
 
 ```sql
-select count(distinct user_id) from (select user_id from dev_db.dbt_puneethbgv1996gmailcom.stg_orders qualify count(distinct order_id) over(partition by user_id) = 2)
+select count(distinct user_id) from
+(select user_id
+from dev_db.dbt_puneethbgv1996gmailcom.stg_orders
+qualify count(distinct order_id) over(partition by user_id) = 2)
 ```
 
 ### Three+ purchases: 37
 
 ```sql
-select count(distinct user_id) from (select user_id from dev_db.dbt_puneethbgv1996gmailcom.stg_orders qualify count(distinct order_id) over(partition by user_id) > 3)
+select count(distinct user_id) from
+(select user_id
+from dev_db.dbt_puneethbgv1996gmailcom.stg_orders
+qualify count(distinct order_id) over(partition by user_id) > 3)
 ```
 
 
