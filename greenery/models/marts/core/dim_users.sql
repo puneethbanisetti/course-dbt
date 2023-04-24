@@ -6,10 +6,10 @@
 
 SELECT 
     USER_ID,
-    FIRST_NAME || ' ' || LAST_NAME as name,
+    NAME,
     EMAIL,
     PHONE_NUMBER,
     CREATED_AT,
     UPDATED_AT,
     ADDRESS_ID
-FROM {{ source('postgres', 'users') }}
+FROM {{ ref('stg_users') }}

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: Products data 
+    columns:
+      - name: product_id
+        tests:
+          - unique
+  - name: dim_users
+    description: Users data 
+    columns:
+      - name: user_id
+        tests:
+          - unique
+  - name: fact_orders
+    description: Orders data 
+    columns:
+      - name: order_id
+        tests:
+          - unique

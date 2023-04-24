@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: fact_page_views
+    description: Page views events data 
+    columns:
+      - name: event_id
+        tests:
+          - unique
