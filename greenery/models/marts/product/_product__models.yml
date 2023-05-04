@@ -7,3 +7,9 @@ models:
       - name: event_id
         tests:
           - unique
+  - name: fact_conversion_rate_by_product
+    description: Conversion rate by product
+    columns:
+      - name: product_name
+        tests:
+          - unique

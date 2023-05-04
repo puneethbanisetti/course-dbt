@@ -1,3 +1,27 @@
+# Analytics engineering with dbt - Greenery - WEEK 3
+
+## What is our overall conversion rate?
+### 62.45%
+
+```sql
+select count(distinct case when event_type = 'checkout' then session_id else null end)/count(distinct session_id) as conversion_rate
+from dev_db.dbt_puneethbgv1996gmailcom.fact_page_views
+```
+
+## What is our conversion rate by product?
+### These are the top 3 - String of pearls: 60.93%; Arrow Head: 55.55%; Cactus: 54.54%
+```sql
+select product_name, count(distinct case when event_type = 'checkout' then session_id else null end)/count(distinct session_id) as conversion_rate
+from dev_db.dbt_puneethbgv1996gmailcom.fact_page_views
+group by 1
+order by 2 desc
+```
+
+## Inventory change from week 2 to week 3
+### Philodendron, Bamboo, ZZ Plant, Monstera
+
+
+
 # Analytics engineering with dbt - Greenery - WEEK 2
 
 ## What is our user repeat rate?
