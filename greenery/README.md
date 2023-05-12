@@ -1,3 +1,27 @@
+# Analytics engineering with dbt - Greenery - WEEK 4
+
+## Snapshots
+### I was late with my Week 3 submission and I happened to capture the changes made for Week 4 with my Week 3 submission. This led to me missing the changes that happened in Week 3. I jumped straight from Week 2 to Week 4.
+
+## How are our users moving through the product funnel?
+### Our greenery project's product funnel starts with the page view sessions. The "add to cart" conversion is about 80.8%, "checkout" conversion is about 62.45% and "package shipped" conversion is about 57.96%.
+```sql
+select count(distinct session_id) as overall_sessions,
+count(distinct case when event_type = 'page_view' then session_id else null end) as page_view_sessions,
+count(distinct case when event_type = 'add_to_cart' then session_id else null end) as add_to_cart_sessions,
+count(distinct case when event_type = 'checkout' then session_id else null end) as checkout_sessions,
+count(distinct case when event_type = 'package_shipped' then session_id else null end) as package_shipped_sessions
+from dev_db.dbt_puneethbgv1996gmailcom.fact_page_views
+```
+
+## Which steps in the funnel have largest drop off points?
+### I would believe we need to analyze the drop-off points starting from "add to cart" rather than "page view". strictly going by the numbers the highest drop off point is from "add to cart" to "checkout" where there is a 18.35% drop but I would be more concerned about the 4.49% drop from "checkout" to "package shipped". If my assumption about every package_shipped event getting logged in our events data is correct, this means that for these 4.49% of the sessions, the users never received their orders. We need to fix this issue before worrying about the drops higher up in the product funnel.
+
+## Pitching the value of dbt to my organization
+### My pitch would revolve around having a well structured and documented data modeling processes across use-cases through dbt. And also, how this helps in easily identifying any downstream implications from a potential change in a particular data model. Most importantly, dbt enables data devlopers to be more aware of how data is flowing through the system and help more informed choices.
+
+
+
 # Analytics engineering with dbt - Greenery - WEEK 3
 
 ## What is our overall conversion rate?

@@ -13,3 +13,9 @@ models:
       - name: product_name
         tests:
           - unique
+  - name: product_funnel_by_product
+    description: Users movement through the product funnel
+    columns:
+      - name: product_name
+        tests:
+          - unique
